@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caribbean Investment Holdings and Insurance | CIHI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary: #0E3D2F;      /* Deep Green */
+            --primary-light: #1A5240;
+            --accent: #C49A5A;       /* Gold */
+            --accent-hover: #D4AF7A;
+            --text-dark: #1a1a1a;
+            --text-light: #555555;
+            --bg-light: #F9FAF9;     /* Soft Neutral */
+            --white: #ffffff;
+            --border: #e0e0e0;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 16px rgba(14, 61, 47, 0.08);
+            --radius: 4px; /* Sharp corners for professional look */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .section-padding { padding: 5rem 0; }
+        .text-center { text-align: center; }
+        
+        /* --- HEADER --- */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-dark); }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(14, 61, 47, 0.85), rgba(14, 61, 47, 0.7)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+
+        .hero-content { max-width: 700px; }
+        
+        .hero h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about { background-color: var(--bg-light); }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .feature-item h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .feature-item p { font-size: 0.9rem; color: var(--text-light); }
+
+        /* --- PROJECTS SECTION --- */
+        .section-header {
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+            text-align: center;
+        }
+        
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-light); }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .card-image {
+            height: 220px;
+            background-color: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .card-image img { transform: scale(1.05); }
+
+        .status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--white);
+            color: var(--primary);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body { padding: 2rem; }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .card-title { font-size: 1.5rem; margin-bottom: 1rem; }
+        .card-desc { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+        .impact-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+        }
+
+        /* --- MODAL SYSTEM --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(14, 61, 47, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--white);
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            position: relative;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            line-height: 1;
+        }
+        
+        .modal-close:hover { color: var(--primary); }
+
+        /* Dynamic Content Modal */
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .modal-body { padding: 2rem; }
+        
+        .modal-timeline {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-left: 3px solid var(--accent);
+        }
+
+        .disclaimer-box {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Contact Form Styles */
+        .form-group { margin-bottom: 1.5rem; }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 3rem;
+        }
+
+        .footer-brand h3 { color: var(--white); margin-bottom: 1rem; }
+        .footer-brand p { opacity: 0.7; font-size: 0.9rem; }
+        
+        .footer-links h4 { color: var(--accent); margin-bottom: 1.5rem; font-size: 1rem; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { opacity: 0.8; font-size: 0.9rem; }
+        .footer-links a:hover { opacity: 1; color: var(--accent); }
+
+        .legal-text {
+            text-align: center;
+            font-size: 0.75rem;
+            opacity: 0.5;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; } /* Simplified for demo */
+            .section-padding { padding: 3rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">CIHI<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact" onclick="openContactModal('General Inquiry')">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Building a Legacy for Haiti's Future.</h1>
+            <p>Collective ownership, transparency, and high-impact development. Join us in building real assets—from sustainable agriculture to essential infrastructure.</p>
+            <a href="#projects" class="btn btn-accent">Explore Projects</a>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Invest in Real Value, Not Speculation.</h2>
+                    <p>Caribbean Investment Holdings and Insurance (CIHI) was founded on a simple principle: Haiti's growth requires long-term commitment, not short-term flips. We focus on tangible assets that create jobs, housing, and food security.</p>
+                    <p>Our model is institutional-grade. We do not offer "get rich quick" schemes. We offer the opportunity to be a stakeholder in the physical reconstruction of our economy.</p>
+                    
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <h4>Tangible Assets</h4>
+                            <p>Real estate, farmland, and energy grids.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Community Focus</h4>
+                            <p>Projects vetted for local job creation.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Transparency</h4>
+                            <p>Clear ownership structures and reporting.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Compliance</h4>
+                            <p>Strict legal and operational standards.</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="background: #e0e0e0; height: 400px; border-radius: var(--radius); overflow: hidden;">
+                    <img src="https://images.unsplash.com/photo-1558227691-41ea78d1f631?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Architectural Plan" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Current Opportunities</h2>
+                <p>Explore our portfolio of active and planned developments across the region.</p>
+            </div>
+
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div class="card-image">
+                        <span class="status-badge">Development</span>
+                        <img src="https://images.unsplash.com/photo-1600596542815-e328701102b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Villa Project">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-meta">Pétion-Ville • Real Estate</p>
+                        <h3 class="card-title">Les Jardins Heights</h3>
+                        <p class="card-desc">A sustainable residential complex focusing on energy independence and modern security standards.</p>
+                        <div class="impact-tags">
+                            <span class="tag">Housing</span>
+                            <span class="tag">Solar</span>
+                        </div>
+                        <button class="btn btn-outline" onclick="openProjectModal(1)">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-image">
+                        <span class="status-badge">Active</span>
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Agriculture">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-meta">Artibonite • Agriculture</p>
+                        <h3 class="card-title">Green Rice Initiative</h3>
+                        <p class="card-desc">Modernizing local rice production through mechanized irrigation and cooperative storage facilities.</p>
+                        <div class="impact-tags">
+                            <span class="tag">Food Security</span>
+                            <span class="tag">Jobs</span>
+                        </div>
+                        <button class="btn btn-outline" onclick="openProjectModal(2)">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-image">
+                        <span class="status-badge">Planning</span>
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Infrastructure">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-meta">Cap-Haïtien • Infrastructure</p>
+                        <h3 class="card-title">Port Logistics Hub</h3>
+                        <p class="card-desc">Warehousing and cold-chain logistics support to facilitate export of Haitian goods.</p>
+                        <div class="impact-tags">
+                            <span class="tag">Trade</span>
+                            <span class="tag">Infrastructure</span>
+                        </div>
+                        <button class="btn btn-outline" onclick="openProjectModal(3)">Learn More</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>CIHI.</h3>
+                    <p>Caribbean Investment Holdings & Insurance.</p>
+                    <p>Building Haiti, one asset at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">info@cihi-haiti.com</a></li>
+                        <li><a href="#">+509 0000 0000</a></li>
+                        <li>Port-au-Prince, Ouest</li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Sectors</h4>
+                    <ul>
+                        <li><a href="#">Real Estate</a></li>
+                        <li><a href="#">Agriculture</a></li>
+                        <li><a href="#">Energy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="legal-text">
+                <p>© 2024 Caribbean Investment Holdings and Insurance. All Rights Reserved.</p>
+                <p style="margin-top: 10px;">DISCLAIMER: This website is for informational purposes only. It does not constitute an offer to sell or a solicitation of an offer to buy any securities. CIHI does not collect funds online. All investment discussions are subject to strict KYC (Know Your Customer) and AML (Anti-Money Laundering) procedures conducted offline.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeModals()">&times;</span>
+            <div class="modal-header">
+                <p id="modal-category" style="color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase;">Category</p>
+                <h2 id="modal-title">Project Title</h2>
+                <span id="modal-status" style="background: var(--bg-light); padding: 4px 8px; font-size: 0.8rem; border-radius: 4px; margin-top:5px; display:inline-block;">Status</span>
+            </div>
+            <div class="modal-body">
+                <p id="modal-desc">Description goes here...</p>
+                
+                <div class="modal-timeline">
+                    <h4>Project Phase</h4>
+                    <p id="modal-phase">Current focus: Land Acquisition & Permits.</p>
+                </div>
+
+                <div class="disclaimer-box">
+                    "Participation in this project is subject to direct contact, internal validation, and availability."
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="btn btn-primary" onclick="transitionToContact()">Inquire About Participation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeModals()">&times;</span>
+            <div class="modal-header">
+                <h2>Request Information</h2>
+                <p>CIHI does not collect funds online. Please fill out the form below and a representative will contact you securely.</p>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" required placeholder="Jean Baptiste">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" required placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">WhatsApp Number</label>
+                        <input type="tel" class="form-input" required placeholder="+509 ...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Country of Residence</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Area of Interest</label>
+                        <select class="form-select" id="interestSelect">
+                            <option>Real Estate (Les Jardins)</option>
+                            <option>Agriculture (Rice Initiative)</option>
+                            <option>Infrastructure (Port Logistics)</option>
+                            <option>General Investment Info</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Request Contact</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data for Projects
+        const projectsData = [
+            {
+                id: 1,
+                title: "Les Jardins Heights",
+                category: "Real Estate",
+                status: "Development Phase",
+                phase: "Architectural Finalization & Pre-Sales",
+                description: "Located in the hills of Pétion-Ville, this project aims to provide 40 luxury residential units. The focus is on self-sufficiency, featuring integrated solar power systems, water filtration, and private security infrastructure. We are building a community that offers peace of mind amidst the bustle of the city."
+            },
+            {
+                id: 2,
+                title: "Green Rice Initiative",
+                category: "Agriculture",
+                status: "Active Operations",
+                phase: "Expansion of Processing Facility",
+                description: "Haiti imports too much of its food. This initiative in the Artibonite Valley partners with 200+ local farmers. Capital is used to purchase shared harvesting equipment and build a secure storage silo to protect crops from humidity and pests, ensuring farmers can sell when prices are fair."
+            },
+            {
+                id: 3,
+                title: "Port Logistics Hub",
+                category: "Infrastructure",
+                status: "Planning / Permits",
+                phase: "Environmental Impact Assessment",
+                description: "A strategic logistics center near Cap-Haïtien. This project involves the construction of 10,000 sq ft of cold-storage warehousing to support the export of mangoes and seafood. We are currently working with local authorities on zoning and environmental compliance."
+            }
+        ];
+
+        const projectModal = document.getElementById('projectModal');
+        const contactModal = document.getElementById('contactModal');
+        const interestSelect = document.getElementById('interestSelect');
+
+        // Open Project Modal
+        function openProjectModal(id) {
+            const project = projectsData.find(p => p.id === id);
+            
+            if(project) {
+                document.getElementById('modal-title').innerText = project.title;
+                document.getElementById('modal-category').innerText = project.category;
+                document.getElementById('modal-status').innerText = project.status;
+                document.getElementById('modal-desc').innerText = project.description;
+                document.getElementById('modal-phase').innerText = project.phase;
+                
+                // Pre-set the dropdown in contact form for smooth UX
+                interestSelect.value = project.title.includes("Rice") ? "Agriculture (Rice Initiative)" : 
+                                       project.title.includes("Port") ? "Infrastructure (Port Logistics)" : 
+                                       "Real Estate (Les Jardins)";
+
+                projectModal.classList.add('active');
+            }
+        }
+
+        // Open Contact Modal (Directly or from Project)
+        function openContactModal(interest) {
+            if(interest) {
+               // Logic to set dropdown if passed string (omitted for simplicity)
+            }
+            contactModal.classList.add('active');
+        }
+
+        // Transition from Project to Contact
+        function transitionToContact() {
+            projectModal.classList.remove('active');
+            setTimeout(() => {
+                contactModal.classList.add('active');
+            }, 300);
+        }
+
+        // Close Modals
+        function closeModals() {
+            projectModal.classList.remove('active');
+            contactModal.classList.remove('active');
+        }
+
+        // Close on click outside
+        window.onclick = function(event) {
+            if (event.target == projectModal) {
+                projectModal.classList.remove('active');
+            }
+            if (event.target == contactModal) {
+                contactModal.classList.remove('active');
+            }
+        }
+
+        // Handle Form Submit
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            
+            // Simulate processing
+            btn.innerText = "Sending...";
+            btn.style.opacity = "0.7";
+            
+            setTimeout(() => {
+                // Replace form with success message
+                e.target.innerHTML = `
+                    <div style="text-align:center; padding: 2rem 0;">
+                        <h3 style="color: var(--primary);">Thank You</h3>
+                        <p style="margin-top:1rem; color: var(--text-light);">Your information has been received.</p>
+                        <p style="color: var(--text-light);">A CIHI representative will contact you on WhatsApp within 48 hours.</p>
+                        <button onclick="closeModals()" class="btn btn-outline" style="margin-top:1.5rem;">Close</button>
+                    </div>
+                `;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
